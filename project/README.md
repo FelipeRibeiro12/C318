@@ -1,102 +1,85 @@
-# Projeto: Clusterização de Criptomoedas por Perfil de Risco
+**Objetivo de Ciência de Dados:**
+Desenvolver uma pipeline completa:
 
-Este projeto tem como objetivo analisar criptomoedas usando dados reais da API
-da CoinGecko e agrupá-las em perfis de risco (baixo, médio e alto) utilizando
-técnicas de Machine Learning Não Supervisionado.
-
-A motivação principal é auxiliar investidores a construir portfólios mais
-equilibrados, identificando ativos com comportamentos semelhantes em termos de
-retorno, volatilidade e outros indicadores de risco.
-
----
-
-## 📌 Objetivos do Projeto
-
-### 🎯 Objetivo de Negócio
-Ajudar investidores a diversificar seus portfólios por meio da identificação de
-grupos de criptomoedas com perfis de risco semelhantes.
-
-### 🧠 Objetivo de Ciência de Dados
-Desenvolver uma pipeline completa de:
-- Coleta de dados reais via API CoinGecko  
-- Feature engineering  
-- Clusterização (K-Means e PCA)  
-- Avaliação dos clusters (silhouette score)  
-- Visualização gráfica  
+- Coleta de dados reais via API CoinGecko
+- Engenharia de features
+- Clusterização (K-Means e PCA)
+- Avaliação dos clusters (Silhouette Score)
+- Visualização gráfica dos resultados
+- Geração de relatório final
 
 ---
 
 ## 🚀 Como Executar o Projeto
 
-### 1️⃣ **Instale as dependências**
-'''pip install -r requirements.txt'''
+1. **Instale as dependências:**
 
-### 2️⃣ **Execute o pipeline completo**
-'''python main.py'''
+   ```bash
+   pip install -r requirements.txt
+   ```
 
+2. **Execute o pipeline completo:**
 
-Isso irá:
-- Baixar dados reais de várias criptomoedas  
-- Gerar o dataset de features  
-- Aplicar clusterização  
-- Exportar o resultado final:  
-  `data/outputs/crypto_clusters.csv`
+   ```bash
+   python main.py
+   ```
 
----
-
-## 📊 Métodos Utilizados
-
-### 📈 Feature Engineering
-As seguintes métricas são calculadas:
-- **avg_return** → retorno médio diário  
-- **volatility** → volatilidade dos retornos  
-- **downside_std** → risco de quedas  
-- **avg_volume** → volume médio negociado  
-- **avg_marketcap** → valor de mercado médio  
-- **log_mc** e **log_vol** → transformações log  
+3. **Visualize os resultados:**
+   - Os arquivos gerados estarão em `data/outputs/crypto_clusters.csv` e `data/outputs/crypto_clusters_renomeados.csv`.
+   - Para visualizar os clusters em uma interface web, execute:
+   ```bash
+   streamlit run app/app.py
+   ```
 
 ---
 
-## 🤖 Técnicas de Machine Learning
+## 📊 Pipeline e Métodos Utilizados
 
-### 🔹 K-Means (k = 3)
-Usado para identificar 3 perfis de risco:
-1. **Baixo risco**  
-2. **Médio risco**  
-3. **Alto risco**
+### 1. Coleta de Dados
 
-### 🔹 PCA (2 componentes)
-Redução de dimensionalidade para visualização dos clusters em 2D.
+- API CoinGecko: preços históricos, volumes, market cap
+- Notebook: `01_coleta_dados.ipynb`
 
-### 🔹 Silhouette Score
-Métrica usada para avaliar a separação entre os clusters.
+### 2. Análise Exploratória (EDA)
+
+- Estatísticas, gráficos, correlações, outliers
+- Notebook: `02_analise_exploratoria.ipynb`
+
+### 3. Feature Engineering
+
+- Métricas calculadas: `avg_return`, `volatility`, `downside_std`, `avg_volume`, `avg_marketcap`, `abs_return`, `log_mc`, `log_volume`
+- Notebook: `03_feature_engineering.ipynb`
+
+### 4. Modelagem e Clusterização
+
+- Algoritmo: K-Means (k=5)
+- Redução de dimensionalidade: PCA (2 componentes)
+- Avaliação: Silhouette Score
+- Notebook: `04_modelagem_clusters.ipynb`
+
+### 5. Relatório Final
+
+- Visualização dos clusters
+- Interpretação dos grupos
+- Notebook: `05_relatorio_final.ipynb`
+
+### 6. Dashboard Interativo
+
+- Visualização dos clusters por Streamlit
+- Arquivo: `app/app.py`
 
 ---
 
-## 📁 Notebooks Incluídos
+## 📦 Dependências Principais
 
-Cada notebook corresponde a uma etapa do pipeline:
-
-### **01_coleta_dados.ipynb**
-Baixa dados reais da API da CoinGecko.
-
-### **02_analise_exploratoria.ipynb**
-Gráficos, estatísticas, comportamento dos preços.
-
-### **03_feature_engineering.ipynb**
-Cálculo das features de risco.
-
-### **04_modelagem_clusters.ipynb**
-Clusterização com K-Means + visualização PCA.
-
-### **05_relatorio_final.ipynb**
-Versão formatada para entrega.
+- pandas
+- numpy
+- scikit-learn
+- matplotlib
+- seaborn
+- requests
+- streamlit
 
 ---
 
-## 📌 Créditos
-
-- Desenvolvido por: **Felipe Ribeiro**  
 - Projeto para a disciplina **C318 - Tópicos Especiais II**
-
-
